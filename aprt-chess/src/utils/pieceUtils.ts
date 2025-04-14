@@ -14,6 +14,7 @@ export function getPieceColor(x: number, y: number, boardState: Piece[][]) {
   // let color = boardState[y][x]
   //   .split("/")[3] // wQ.svg
   //   .split(".")[0][0]; // w
+  console.log("get piece color", boardState[y][x])
   const color: string = boardState[y][x]
   .split("/")[4]  // wQ-asdf.svg
   .split("-")[0][0]; // w
@@ -28,6 +29,8 @@ export function getPieceType(x: number, y: number, boardState: Piece[][]) {
   // let type = boardState[y][x]
   //   .split("/")[3] // wQ.svg
   //   .split(".")[0][1]; // Q
+  console.log("get piece type", boardState[y][x])
+
   const type: string = boardState[y][x]
   .split("/")[4]  // wQ-asdf.svg
   .split("-")[0][1]; // Q
@@ -46,6 +49,8 @@ export function getPieceName(
   // let pieceName: string = boardState[y][x]
   //   .split("/")[3] // wQ.svg
   //   .split(".")[0]; // wQ
+  console.log("get piece name", boardState[y][x])
+
   const pieceName: string = boardState[y][x]
     .split("/")[4]  // wQ-asdf.svg
     .split("-")[0]; // wQ
