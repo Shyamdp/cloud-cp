@@ -1,0 +1,74 @@
+// moves: castling & en passant & pawn capture remaining
+
+import { validateQueenMove } from "./pieceValidation/queen";
+import { validateRookMove } from "./pieceValidation/rook";
+import { validateBishopMove } from "./pieceValidation/bishop";
+import { validateKnightMove } from "./pieceValidation/knight";
+import { validateKingMove } from "./pieceValidation/king";
+import { validatePawnMove } from "./pieceValidation/pawn";
+import { Piece, PieceColor } from "../types/global";
+
+// isOccupied returns true if a tile is occupied
+function isOccupied(x: number, y: number, boardState: string[][]): boolean {
+  return !!boardState[y][x];
+}
+
+// the switch case which trigges the correct validation logic
+
+export function validate(
+  fromX: number,
+  fromY: number,
+  toX: number,
+  toY: number,
+  pieceName: string,
+  currentPlayerColor: PieceColor,
+  boardState: Piece[][]
+): boolean {
+  // following block is added to handle the case
+  // when validate() is called in the possible moves feature
+  // it might get called for a vacant tile with no piece
+  // hence pieceName === ""
+  if (!pieceName) {
+    return false;
+  }
+
+  if (currentPlayerColor === "w") {
+    switch (pieceName) {
+      case "wP":
+        return validatePawnMove(fromX, fromY, toX, toY, boardState);
+      case "wK":
+        return validateKingMove(fromX, fromY, toX, toY, boardState);
+      case "wQ":
+        return validateQueenMove(fromX, fromY, toX, toY, boardState);
+      case "wN":
+        return validateKnightMove(fromX, fromY, toX, toY, boardState);
+      case "wR":
+        return validateRookMove(fromX, fromY, toX, toY, boardState);
+      case "wB":
+        return validateBishopMove(fromX, fromY, toX, toY, boardState);
+
+      default:
+        break;
+    }
+  } else {
+    switch (pieceName) {
+      case "bP":
+        return validatePawnMove(fromX, fromY, toX, toY, boardState);
+      case "bK":
+        return validateKingMove(fromX, fromY, toX, toY, boardState);
+      case "bQ":
+        return validateQueenMove(fromX, fromY, toX, toY, boardState);
+      case "bN":
+        return validateKnightMove(fromX, fromY, toX, toY, boardState);
+      case "bR":
+        return validateRookMove(fromX, fromY, toX, toY, boardState);
+      case "bB":
+        return validateBishopMove(fromX, fromY, toX, toY, boardState);
+
+      default:
+        break;
+    }
+  }
+
+  return false;
+}
